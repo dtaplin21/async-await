@@ -11,6 +11,7 @@ function runOnTreadmill() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       console.log("done running on treadmill");
+      reject("this is the end");
       resolve();
     }, 500);
   });
@@ -27,12 +28,22 @@ function liftWeights() {
 
 // refactor this function to handle Promises using async/await instead of
   // .then and .catch
-function workout() {
-  stretch()
-    .then(runOnTreadmill)
-    .then(liftWeights)
-    .then(() => console.log("done working out"))
-    .catch((err) => console.log(err));
+async function workout() {
+  // stretch()
+  //   .then(runOnTreadmill)
+  //   .then(liftWeights)
+  //   .then(() => console.log("done working out"))
+  //   .catch((err) => console.log(err));
+
+
+      try { await stretch();
+      await runOnTreadmill();
+      await liftWeights();
+      console.log("excercise comleted")
+      } catch(error) {
+        console.error(error)
+      }
+
 }
 
 /* ============================ TEST YOUR CODE ============================
